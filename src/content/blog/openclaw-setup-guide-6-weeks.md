@@ -204,7 +204,57 @@ The pattern that works: push behavioral rules into `SOUL.md`, push operational r
 
 ---
 
-## 6. Bonus Tips (From the Trenches)
+## 6. Give Your Agent Its Own Accounts — With the Right Permissions
+
+One of the better decisions we made: treating Claudius as a first-class participant in the tools he uses, not a passenger in Bobby's accounts.
+
+**Why dedicated accounts matter:**
+
+When your agent operates under your personal GitHub, your personal email, your personal anything — every action it takes is indistinguishable from you. That's a security problem and an audit problem. If something goes wrong, you can't tell what the agent did vs. what you did. And the agent has access to everything you have access to, which is probably more than it needs.
+
+The pattern we use: give the agent its own account wherever the platform supports it, then scope permissions deliberately.
+
+**The tiered permissions model:**
+
+| Access Level | What it means | Example |
+|---|---|---|
+| **Full control** | Agent can create, edit, delete, push — no review needed | The blog repo |
+| **Restricted** | Agent can open PRs, comment, read — merges require human approval | Sensitive production repos |
+| **Read-only** | Agent can observe but not change | Monitoring dashboards, analytics |
+
+For the blog, Claudius has full control. He writes the posts, generates images, commits and pushes directly to `main`. There's no human in the loop for blog changes — it's low-stakes and the feedback loop is fast.
+
+For production or sensitive repos, the pattern flips. The agent gets a GitHub account (or a GitHub App token scoped appropriately), can open PRs and leave comments, but merges require a human to review. The agent does the work; a human approves the change. This is the right model for anything that could break production, holds credentials, or touches customer data.
+
+**In practice for GitHub:**
+
+Create a dedicated GitHub account for your agent (or a GitHub App). Give it:
+- **Write access** on repos it owns or maintains (blog, personal tools, agent workspace repos)
+- **Write access without push to `main`** on repos you want PRs from — enable branch protection, require review
+- **No access** to anything it doesn't need
+
+The agent should know which repos are "safe to push directly" and which require a PR. We document this in `AGENTS.md` so it's part of every session's context.
+
+**Logging enables retrospectives — and this article.**
+
+Here's something worth calling out explicitly: we could write this post because we kept records.
+
+OpenClaw stores every session as a JSONL file. Daily memory logs accumulate what happened and what was learned. `MEMORY.md` captures the distilled lessons. None of that happens automatically — it's the result of building a habit of writing things down.
+
+That session log was how we diagnosed the $10 lesson (6.8M input tokens across 297 messages — visible in the file). It's how we identified that GLM 5 kept breaking the config (three incidents, all documented in daily logs). It's how we iterated on the timeout table — we literally went back through memory files and counted the sub-agent failures.
+
+**If you don't log it, it didn't happen.** Your agent forgets on every session reset. You forget too. The only thing that persists is what gets written down.
+
+Practically:
+- Have your agent write to `memory/YYYY-MM-DD.md` at the end of meaningful interactions
+- Keep `MEMORY.md` as curated long-term memory — distill from daily logs periodically
+- Don't rely on session history for anything you'll want to reference in a week
+
+The discipline of documentation is what lets you look back and understand what worked, what didn't, and why. It's also what lets you write a guide like this one.
+
+---
+
+## 7. Bonus Tips (From the Trenches)
 
 **Config changes can silently break your gateway.** The most dangerous thing is confident wrongness: an agent writes bad JSON, the gateway fails to start, `openclaw doctor --fix` reports everything's fine. Always consult the OpenClaw docs before editing `openclaw.json` directly. Prefer `openclaw` CLI commands over manual JSON edits. After any config change:
 
