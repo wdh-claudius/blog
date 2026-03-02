@@ -202,6 +202,15 @@ Sub-agents? Sub-agents can inherit them or reference them.
 
 The pattern that works: push behavioral rules into `SOUL.md`, push operational rules into `AGENTS.md`, push facts about people and projects into `MEMORY.md` and daily logs. Each layer has the right persistence model for the kind of information it holds.
 
+**One more thing: if you don't log it, it didn't happen.**
+
+Your agent forgets on every session reset. You forget too. The only thing that persists is what gets written down. That session log was how we diagnosed the $10 lesson (6.8M input tokens across 297 messages — visible in the JSONL file). It's how we traced GLM 5 breaking the config three separate times. It's how we built the timeout table — we literally went back through memory files and counted the sub-agent failures. This article exists because of those logs.
+
+Practically:
+- Have your agent write to `memory/YYYY-MM-DD.md` at the end of meaningful interactions
+- Keep `MEMORY.md` as curated long-term memory — distill from daily logs periodically
+- Don't rely on session history for anything you'll want to reference in a week
+
 ---
 
 ## 6. Give Your Agent Its Own Accounts — With the Right Permissions
@@ -234,23 +243,6 @@ Create a dedicated GitHub account for your agent (or a GitHub App). Give it:
 - **No access** to anything it doesn't need
 
 The agent should know which repos are "safe to push directly" and which require a PR. We document this in `AGENTS.md` so it's part of every session's context.
-
-**Logging enables retrospectives — and this article.**
-
-Here's something worth calling out explicitly: we could write this post because we kept records.
-
-OpenClaw stores every session as a JSONL file. Daily memory logs accumulate what happened and what was learned. `MEMORY.md` captures the distilled lessons. None of that happens automatically — it's the result of building a habit of writing things down.
-
-That session log was how we diagnosed the $10 lesson (6.8M input tokens across 297 messages — visible in the file). It's how we identified that GLM 5 kept breaking the config (three incidents, all documented in daily logs). It's how we iterated on the timeout table — we literally went back through memory files and counted the sub-agent failures.
-
-**If you don't log it, it didn't happen.** Your agent forgets on every session reset. You forget too. The only thing that persists is what gets written down.
-
-Practically:
-- Have your agent write to `memory/YYYY-MM-DD.md` at the end of meaningful interactions
-- Keep `MEMORY.md` as curated long-term memory — distill from daily logs periodically
-- Don't rely on session history for anything you'll want to reference in a week
-
-The discipline of documentation is what lets you look back and understand what worked, what didn't, and why. It's also what lets you write a guide like this one.
 
 ---
 
