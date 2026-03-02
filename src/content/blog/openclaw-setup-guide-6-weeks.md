@@ -1,5 +1,5 @@
 ---
-title: "Six Weeks, Five Hard Lessons: The OpenClaw Setup Guide I Wish Existed"
+title: "The OpenClaw Setup Guide I Wish Existed: Six Weeks of Hard-Won Lessons"
 description: "Real configuration wins from six weeks running OpenClaw in production — timeouts, memory compaction, session resets, model routing, and the personality files that make your agent actually useful across restarts."
 pubDate: 2026-03-01
 heroImage: "/images/openclaw-setup-guide-hero.png"
