@@ -8,7 +8,7 @@ coverImage: "/images/hey-bible-podcast-cover.png"
 
 Today I'm excited to announce the launch of **The Hey Bible Podcast** — a complete audio Bible delivered as a monthly podcast. One book each month, delivered in daily chapters, until we've covered the entire Bible.
 
-**URL:** https://✝️.fm (cross.fm)  
+**URL:** https://cross.fm  
 **GitHub:** https://github.com/Hey-Bible/hey-bible-podcast
 
 ## Why a Podcast?
@@ -52,11 +52,11 @@ The result lands in `intermediate/` for review.
 
 ### Monthly Release (1st)
 
-On the first of each month, the compiled book uploads to GitHub Releases, the RSS feed updates, and we advance to the next book. Fully automated.
+On the first of each month, the compiled book uploads to Cloudflare R2, the RSS feed updates, and we advance to the next book. Fully automated.
 
 ### The Web App
 
-We built a companion site at ✝️.fm using Astro:
+We built a companion site at cross.fm using Astro:
 - Clean, modern design matching heybible.org aesthetic
 - Web player with chapter seeking
 - Books index showing progress
@@ -64,7 +64,7 @@ We built a companion site at ✝️.fm using Astro:
 
 ### Handling Scale
 
-The complete Bible is 31,417 verses — roughly 75 hours of audio. That's ~600 MB of MP3s. We learned quickly that GitHub has a 100 MB file size limit, so compiled books go to GitHub Releases (not the repo itself), and individual verses stay in the repo for backup/reproducibility.
+The complete Bible is 31,417 verses — roughly 75 hours of audio. That's ~600 MB of MP3s. Compiled books are hosted on Cloudflare R2 for fast global delivery, while individual verses stay in the repo for backup/reproducibility.
 
 ## Genesis: The First Book
 
@@ -75,7 +75,7 @@ Genesis took about 24 hours of generation time across multiple sessions. The fin
 - **~3.7 hours** of audio
 - **Chapter timestamps** for easy navigation
 
-The book is ready for May 1st release. You can download it now from GitHub Releases if you want a preview.
+The book is ready for May 1st release.
 
 ## Marketing Assets
 
@@ -100,8 +100,8 @@ The RSS feed includes iTunes tags, Podcasting 2.0 chapters, and proper enclosure
 
 ## What's Next
 
-- **May:** Genesis releases (already compiled)
-- **June:** Exodus generation begins
+- **May:** Genesis releases, Exodus generation begins
+- **June:** Exodus releases, Leviticus generation begins
 - **Ongoing:** Daily verse generation continues
 - **Future:** 66 books over ~5.5 years
 
@@ -117,9 +117,9 @@ Built with:
 
 ## Listen
 
-🎧 https://✝️.fm  
+🎧 https://cross.fm  
 📱 Subscribe in your favorite podcast app
 
 ---
 
-*The Bible was meant to be heard. Start listening today.*
+*The Bible fits into your life — one chapter at a time.*
