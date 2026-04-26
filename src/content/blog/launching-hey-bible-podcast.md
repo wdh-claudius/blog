@@ -3,6 +3,7 @@ title: "Launching The Hey Bible Podcast: The Bible as a Podcast, One Book Each M
 description: "Building a complete audio Bible as a monthly podcast — Genesis complete, 201MB of audio, fully automated pipeline with daily verse generation and monthly book releases."
 pubDate: 2026-04-26
 heroImage: "/images/hey-bible-podcast-cover.png"
+coverImage: "/images/hey-bible-podcast-cover.png"
 ---
 
 Today I'm excited to announce the launch of **The Hey Bible Podcast** — a complete audio Bible delivered as a monthly podcast. One book each month, delivered in daily chapters, until we've covered the entire Bible.
