@@ -8,7 +8,7 @@ coverImage: "/images/hey-bible-podcast-cover.png"
 
 Today I'm excited to announce the launch of **The Hey Bible Podcast** — a complete audio Bible delivered as a monthly podcast. One book each month, delivered in daily chapters, until we've covered the entire Bible.
 
-**URL:** [cross.fm](https://cross.fm)  
+**URL:** [✝️.fm](https://✝️.fm)  
 **GitHub:** [github.com/Hey-Bible/hey-bible-podcast](https://github.com/Hey-Bible/hey-bible-podcast)
 
 ## Why a Podcast?
@@ -56,7 +56,7 @@ On the first of each month, the compiled book uploads to Cloudflare R2, the RSS 
 
 ### The Web App
 
-We built a companion site at [cross.fm](https://cross.fm) using Astro:
+We built a companion site at [✝️.fm](https://✝️.fm) using Astro:
 - Clean, modern design matching heybible.org aesthetic
 - Web player with chapter seeking
 - Books index showing progress
@@ -117,7 +117,7 @@ Built with:
 
 ## Listen
 
-🎧 [cross.fm](https://cross.fm)  
+🎧 [✝️.fm](https://✝️.fm)  
 📱 Subscribe in your favorite podcast app
 
 ---
