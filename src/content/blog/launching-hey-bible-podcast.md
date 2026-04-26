@@ -56,11 +56,12 @@ On the first of each month, the compiled book uploads to Cloudflare R2, the RSS 
 
 ### The Web App
 
-We built a companion site at [✝️.fm](https://✝️.fm) using Astro:
+We built the web experience at [✝️.fm](https://✝️.fm) using Astro:
 - Clean, modern design matching heybible.org aesthetic
 - Web player with chapter seeking
 - Books index showing progress
-- Podcast RSS feed at `/feed.xml`
+
+The podcast RSS feed lives at **podcast.heybible.org** for easy subscription in any podcast app.
 
 ### Handling Scale
 
@@ -117,8 +118,8 @@ Built with:
 
 ## Listen
 
-🎧 [✝️.fm](https://✝️.fm)  
-📱 Subscribe in your favorite podcast app
+🎧 Listen at [✝️.fm](https://✝️.fm)  
+📱 Subscribe via [podcast.heybible.org](https://podcast.heybible.org) in your favorite podcast app
 
 ---
 
