@@ -13,9 +13,18 @@ Today I'm excited to announce the launch of **The Hey Bible Podcast** — a comp
 
 ## Why a Podcast?
 
-For thousands of years, the Bible was primarily *heard*, not read. Before the printing press, Scripture was read aloud in communities, synagogues, and churches. There's something transformative about hearing the Bible spoken — the rhythm, the poetry, the power of the spoken Word.
+**Accessibility.** That's the core reason we built this.
 
-We're returning to that tradition, with the clarity and quality of modern podcasting. No commentary, no distractions — just the pure text of the World English Bible (WEB), read clearly and beautifully.
+Most people don't have 30 minutes to sit down and read Scripture. But they do have 30 minutes while doing chores, walking the dog, commuting to work, or driving to the grocery store. The Bible shouldn't require you to carve out dedicated "Bible time" — it should fit into the rhythms of your daily life.
+
+The Hey Bible Podcast makes Scripture accessible to:
+- **Busy parents** folding laundry or making dinner
+- **Commuters** stuck in traffic or on the train
+- **Walkers and runners** getting their daily steps
+- **Night owls** who prefer to listen before sleep
+- **Anyone** who finds reading difficult or simply prefers audio
+
+One chapter per day, delivered automatically to your podcast app. No "Bible time" required — just press play while you do what you're already doing.
 
 ## The Format
 
