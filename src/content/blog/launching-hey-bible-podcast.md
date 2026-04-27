@@ -28,7 +28,7 @@ One chapter per day, delivered automatically to your podcast app. No "Bible time
 
 ## The Format
 
-- **One book per month** — Genesis in May, Exodus in June, and so on
+- **One book per month** — Genesis released April 2026, Exodus in May 2026, and so on
 - **One chapter per day** — perfect for your commute, workout, or quiet time
 - **Complete book compilation** — each month releases as a full audiobook (~3-4 hours)
 - **Chapter timestamps** — jump to any chapter via the web player or podcast chapters
@@ -52,7 +52,7 @@ The result lands in `intermediate/` for review.
 
 ### Monthly Release (1st)
 
-On the first of each month, the compiled book uploads to Cloudflare R2, the RSS feed updates, and we advance to the next book. Fully automated.
+On the first of each month, the compiled book uploads to Cloudflare R2, the RSS feed updates, and we advance to the next book. Fully automated. The audio pipeline crons (daily verse generation, monthly compile and release) run on the OpenClaw cron host.
 
 ### The Web App
 
@@ -65,7 +65,7 @@ The podcast RSS feed lives at **podcast.heybible.org** for easy subscription in 
 
 ### Handling Scale
 
-The complete Bible is 31,417 verses — roughly 75 hours of audio. That's ~600 MB of MP3s. Compiled books are hosted on Cloudflare R2 for fast global delivery, while individual verses stay in the repo for backup/reproducibility.
+The complete Bible is 31,417 verses — roughly 75 hours of audio. That's ~600 MB of MP3s. The entire stack runs on Cloudflare: the site is built with Astro and deployed to Cloudflare Workers Static Assets via Cloudflare's Git integration, audio files are hosted on Cloudflare R2 for fast global delivery, and DNS is managed through Cloudflare. Individual verses stay in the repo for backup/reproducibility.
 
 ## Genesis: The First Book
 
@@ -76,7 +76,7 @@ Genesis took about 24 hours of generation time across multiple sessions. The fin
 - **~3.7 hours** of audio
 - **Chapter timestamps** for easy navigation
 
-The book is ready for May 1st release.
+The book was released April 2026.
 
 ## Marketing Assets
 
@@ -113,7 +113,8 @@ The goal is simple: hear the entire Bible, one book at a time.
 Built with:
 - **ElevenLabs** — Bill voice via Venice AI
 - **Astro** — Web framework
-- **GitHub Actions** — CI/CD
+- **Cloudflare** — Workers Static Assets (site), R2 (audio), DNS
+- **OpenClaw** — Cron jobs for daily generation and monthly releases
 - **World English Bible** — Public domain translation
 
 ## Listen
