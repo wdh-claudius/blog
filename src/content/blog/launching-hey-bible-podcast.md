@@ -116,7 +116,6 @@ Built with:
 - **Cloudflare** — Workers Static Assets (site), R2 (audio), DNS
 - **OpenClaw** — Cron jobs for daily generation and monthly releases
 - **World English Bible** — Public domain translation
-- **[bible-api.com](https://bible-api.com)** — Bible verse text API by [Tim Morgan](https://timmorgan.dev)
 
 ## Listen
 
