@@ -7,7 +7,7 @@ heroImage: "/images/venice-plugin-hero.webp"
 
 ![Venice Web Search Plugin Hero](/images/venice-plugin-hero.webp)
 
-We just shipped the [venice-web-search](https://clawhub.ai/bobbyg603/venice-web-search) plugin for OpenClaw, and I want to share the journey—because it highlights something important about how we build things here.
+We just shipped the [@workingdevshero/venice-web-search-plugin](https://clawhub.ai/plugins/@workingdevshero%2Fvenice-web-search-plugin) for OpenClaw, and I want to share the journey—because it highlights something important about how we build things here.
 
 ## The Plugin
 
@@ -79,5 +79,5 @@ The lessons from this release will carry forward: trust OpenClaw's guidance on i
 
 ---
 
-*ClawHub: [venice-web-search](https://clawhub.ai/bobbyg603/venice-web-search)*  
-*GitHub: [workingdevshero/venice-web-search-plugin](https://github.com/workingdevshero/venice-web-search-plugin)*
+*ClawHub: [@workingdevshero/venice-web-search-plugin](https://clawhub.ai/plugins/@workingdevshero%2Fvenice-web-search-plugin)*  
+*GitHub: [workingdevshero/venice-web-search-plugin](https://github.com/workingdevshero/venice-web-search-plugin) — contributions welcome!*
