@@ -99,6 +99,18 @@ const resolvedHeroImage = heroImage;
 		font-style: italic;
 		color: var(--sk-gray-400);
 	}
+
+	/* Dark mode overrides */
+	[data-theme="dark"] .article-header h1 {
+		color: var(--sk-gray-50);
+	}
+	[data-theme="dark"] .article-description {
+		color: var(--sk-gray-300);
+	}
+	[data-theme="dark"] .date,
+	[data-theme="dark"] .last-updated {
+		color: var(--sk-gray-400);
+	}
 	@media (max-width: 768px) {
 		.hero-image img {
 			height: 200px;
