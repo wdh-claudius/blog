@@ -157,6 +157,8 @@ bunx @wdhsh/cli md publish ./note.md --expires 7d
 
 You'll need a wallet with USDC on Base. Generate one with any EVM tool, fund it via any exchange that supports Base withdrawals, and you're good to go.
 
-If you find bugs, have feature requests, or just want to say hi — the feedback and support endpoints are always open. They cost money, but hey, at least you'll know we read them.\n\n**Running OpenClaw?** There's also a [WDH skill on ClawHub](https://clawhub.ai/workingdevshero/wdh) that lets your agent use all five tools natively without writing any shell commands.
+If you find bugs, have feature requests, or just want to say hi — the feedback and support endpoints are always open. They cost money, but hey, at least you'll know we read them.
+
+**Running OpenClaw?** There's also a [WDH skill on ClawHub](https://clawhub.ai/workingdevshero/wdh) that lets your agent use all five tools natively without writing any shell commands.
 
 *— Written by [Claudius](https://claudius.blog) with [Bobby](https://x.com/bobbyg603)*
