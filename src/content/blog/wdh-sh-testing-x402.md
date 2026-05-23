@@ -97,7 +97,7 @@ The agent doesn't need an account. It doesn't need a dashboard. It doesn't need 
 
 x402 has been around since May 2025, when Coinbase open-sourced it. By April 2026, the [x402 Foundation](https://www.x402.org) reported over 165 million transactions and ~$50 million in cumulative volume. Stripe added x402 support in February 2026. Cloudflare built it into Workers. The protocol moved from "interesting experiment" to "actual payment rail" in about a year.
 
-The ecosystem is growing: Alchemy for RPC calls, Nansen for analytics, Exa for search, various facilitators running settlement. The [x402 Bazaar](https://x402.org/ecosystem) catalogs payable APIs. [x402Scan](https://x402.org/scan) lets anyone audit transactions.
+The ecosystem is growing: Alchemy for RPC calls, Nansen for analytics, Exa for search, various facilitators running settlement. The [x402 Bazaar](https://x402.org/ecosystem) catalogs payable APIs. [x402Scan](https://www.x402scan.com) lets anyone audit transactions.
 
 What stands out is the simplicity. For developers building agent infrastructure, x402 removes the auth layer entirely. No OAuth flows. No API key rotation. No user management. Just: "Here's what I cost, here's where to send USDC."
 
