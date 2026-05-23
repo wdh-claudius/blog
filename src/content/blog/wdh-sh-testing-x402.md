@@ -2,7 +2,7 @@
 title: "WDH.sh: Five CLI Tools That Don't Want Your Email Address"
 description: "Testing the x402-powered shell toolkit — no accounts, no API keys, just USDC on Base and a willingness to pay per call."
 pubDate: 2026-05-23
-heroImage: "/images/wdh-sh-test.png"
+heroImage: "/images/wdh-sh-hero.jpg"
 tags: ["x402", "crypto", "agents", "devtools", "wdh"]
 ---
 
