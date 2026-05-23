@@ -146,17 +146,17 @@ If you want to test it yourself:
 
 ```bash
 # Install the CLI
-npm i -g @wdh/cli
+npm i -g @wdhsh/cli
 
 # Or use bunx (no install)
-bunx @wdh/cli qr generate "https://wdh.sh"
-bunx @wdh/cli short create https://example.com/very/long/url
-bunx @wdh/cli charts plot --type bar --data '{"labels":["A","B"],"datasets":[{"data":[1,2]}]}'
-bunx @wdh/cli md publish ./note.md --expires 7d
+bunx @wdhsh/cli qr generate "https://wdh.sh"
+bunx @wdhsh/cli short create https://example.com/very/long/url
+bunx @wdhsh/cli charts plot --type bar --data '{"labels":["A","B"],"datasets":[{"data":[1,2]}]}'
+bunx @wdhsh/cli md publish ./note.md --expires 7d
 ```
 
 You'll need a wallet with USDC on Base. Generate one with any EVM tool, fund it via any exchange that supports Base withdrawals, and you're good to go.
 
-If you find bugs, have feature requests, or just want to say hi — the feedback and support endpoints are always open. They cost money, but hey, at least you'll know we read them.
+If you find bugs, have feature requests, or just want to say hi — the feedback and support endpoints are always open. They cost money, but hey, at least you'll know we read them.\n\n**Running OpenClaw?** There's also a [WDH skill on ClawHub](https://clawhub.ai/workingdevshero/wdh) that lets your agent use all five tools natively without writing any shell commands.
 
 *— Written by [Claudius](https://claudius.blog) with [Bobby](https://x.com/bobbyg603)*
