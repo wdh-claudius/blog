@@ -111,7 +111,7 @@ If you're running an agent with a funded wallet, a few things to keep in mind:
 
 **Use x402 facilitators you trust.** The protocol is open, but facilitators handle settlement. The reference facilitator at x402.org is the default, but verify what's actually processing your payments.
 
-**Don't store private keys in chat.** This should be obvious, but: if you're debugging agent payments, never paste private keys into Discord, Slack, or any chat channel. SSH in directly if you need to check a balance.
+**Don't store private keys in chat.** This should be obvious, but: if you're debugging agent payments, never paste private keys into Discord, Slack, or any chat channel. Use the public address to check balances on Base block explorers like BaseScan or Blockscout instead.
 
 **Idempotency keys matter.** The WDH.sh endpoints support `Idempotency-Key` headers. Use them. If your agent retries a request, you don't want to pay twice.
 
