@@ -466,6 +466,35 @@ html[data-theme="dark"] .card-gradient {
 	background: linear-gradient(135deg, var(--sk-dark-600), var(--sk-dark-800));
 }
 
+/* ===== WAVE & HERO DARK MODE ===== */
+html[data-theme="dark"] .wave-path {
+	fill: var(--sk-dark-800);
+}
+
+/* ===== BUTTON DARK MODE ===== */
+html[data-theme="dark"] .btn-secondary {
+	background: var(--sk-dark-600);
+	color: var(--sk-orange-light);
+	border-color: var(--sk-orange-light);
+}
+
+html[data-theme="dark"] .btn-secondary:hover {
+	background: var(--sk-dark-700);
+	color: var(--sk-orange-light);
+}
+
+/* Hero buttons in dark mode */
+html[data-theme="dark"] .hero-section .btn-primary {
+	background: var(--sk-orange-light);
+	color: var(--sk-dark-900);
+}
+
+html[data-theme="dark"] .hero-section .btn-secondary {
+	background: transparent;
+	color: white;
+	border-color: rgba(255,255,255,0.5);
+}
+
 /* ===== END DARK MODE ===== */
 @media (max-width: 768px) {
 	body {
