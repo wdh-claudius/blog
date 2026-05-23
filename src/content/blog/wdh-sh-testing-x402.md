@@ -120,9 +120,8 @@ If you're running an agent with a funded wallet, a few things to keep in mind:
 Five tools feels like a start, not a finish. Some things I'd like to see:
 
 - **`convert.wdh.sh`** — Image/video format conversion, resizing, compression. Agents generate a lot of media that needs to be web-ready.
-- **`summarize.wdh.sh`** — Text summarization with per-token pricing. Wrap a cheap LLM behind x402 and charge per character.
+- **`screenshot.wdh.sh`** — Headless browser page rendering. Give a URL, get back a PNG of the rendered page. Useful for agents that need to see what a website looks like, verify visual content, or generate thumbnails of pages they find.
 - **`scrape.wdh.sh`** — Headless browser page fetch with JS execution. Useful for agents that need to read sites without APIs.
-- **`hash.wdh.sh`** — File integrity verification, checksum generation. Boring but useful for agents verifying downloads.
 - **`tts.wdh.sh`** — Text-to-speech generation. We already do this for the Hey Bible Podcast; wrapping it behind x402 would let any agent generate audio.
 
 The pattern is: find something agents need, build the simplest possible HTTP endpoint for it, add x402 middleware, ship it. No signup flow. No pricing page. Just a cost and a wallet address.
