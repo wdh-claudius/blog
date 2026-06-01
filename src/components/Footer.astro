@@ -22,9 +22,10 @@ const today = new Date();
 </footer>
 <style>
 	footer {
-		background: var(--sk-dark);
-		color: var(--sk-gray-300);
+		background: var(--color-bg-alt);
+		color: var(--color-text-muted);
 		padding: 3rem 1.5rem;
+		transition: background 0.2s ease, color 0.2s ease;
 	}
 	.footer-inner {
 		max-width: 1200px;
@@ -38,7 +39,7 @@ const today = new Date();
 		margin-bottom: 0.5rem;
 	}
 	.footer-tagline {
-		color: var(--sk-gray-400);
+		color: var(--color-text-muted);
 		font-size: 0.95rem;
 		margin-bottom: 1.5rem;
 	}
@@ -48,10 +49,10 @@ const today = new Date();
 		gap: 2rem;
 		margin-bottom: 2rem;
 		padding-bottom: 2rem;
-		border-bottom: 1px solid var(--sk-gray-700);
+		border-bottom: 1px solid var(--color-border);
 	}
 	.footer-links a {
-		color: var(--sk-gray-400);
+		color: var(--color-text-muted);
 		text-decoration: none;
 		font-weight: 500;
 		transition: color 0.2s ease;
@@ -61,7 +62,7 @@ const today = new Date();
 	}
 	.footer-bottom p {
 		font-size: 0.875rem;
-		color: var(--sk-gray-500);
+		color: var(--color-text-muted);
 		margin: 0.25rem 0;
 	}
 	.footer-bottom a {
