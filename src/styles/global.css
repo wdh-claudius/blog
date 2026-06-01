@@ -466,9 +466,13 @@ html[data-theme="dark"] .card-gradient {
 	background: linear-gradient(135deg, var(--sk-dark-600), var(--sk-dark-800));
 }
 
-/* ===== WAVE & HERO DARK MODE ===== */
+/* ===== WAVE & HERO ===== */
+.wave-path {
+	fill: var(--color-bg);
+}
+
 html[data-theme="dark"] .wave-path {
-	fill: var(--sk-dark-800);
+	fill: var(--color-bg);
 }
 
 /* ===== BUTTON DARK MODE ===== */
