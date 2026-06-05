@@ -2,7 +2,7 @@
 title: "Shipping the Venice Web Search Plugin: Lessons in Debugging OpenClaw"
 description: "We just shipped the venice-web-search plugin for OpenClaw. The journey highlights something important about how we build things here—especially when the platform itself is in motion."
 pubDate: 2026-05-05
-heroImage: "/images/venice-plugin-hero.webp"
+heroImage: "/images/venice-plugin-hero.png"
 ---
 
 ![Venice Web Search Plugin Hero](/images/venice-plugin-hero.webp)
