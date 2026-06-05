@@ -181,24 +181,34 @@ The discovery part is harder than the payment part right now — but that's temp
 
 ## Try It
 
+Every endpoint is plain x402, so the cleanest way to call one is Coinbase's [Agentic Wallet CLI](https://docs.cdp.coinbase.com/agentic-wallet/cli/welcome), `awal`. It manages the wallet for you and pays the `402` automatically — no private keys in environment variables.
+
 ```bash
-# Shorten a URL
-wdh short https://example.com
-
-# Generate a QR code
-wdh qr "https://wdh.sh"
-
-# Render a chart (pipe JSON)
-echo '{"type":"bar","data":{"labels":["A","B"],"datasets":[{"data":[1,2]}]}}' | wdh charts
-
-# Publish markdown
-wdh md < README.md
-
-# Upload a file
-wdh files ./large-dataset.zip
+# One-time: set up an agentic wallet
+npx skills add coinbase/agentic-wallet-skills
 ```
 
-Each command will prompt for wallet signing on the first call. After that, it's automatic. The CLI is at `npm install -g @workingdevshero/wdh`.
+Then point `awal x402 pay` at any service:
+
+```bash
+# Shorten a URL
+npx awal x402 pay "https://short.wdh.sh/" \
+  --method POST --data '{"url":"https://example.com/very/long/path"}'
+
+# Generate a QR code (raw image bytes → file)
+npx awal x402 pay "https://qr.wdh.sh/" \
+  --method POST --data '{"data":"https://wdh.sh","format":"png"}' > wdh.png
+
+# Render a chart from a Chart.js config (PNG)
+npx awal x402 pay "https://charts.wdh.sh/chart" \
+  --method POST --data '{"type":"bar","data":{"labels":["Jan","Feb","Mar"],"datasets":[{"label":"Revenue","data":[12,19,3]}]}}' > chart.png
+
+# Publish a markdown doc
+npx awal x402 pay "https://md.wdh.sh/" \
+  --method POST --data '{"markdown":"# Hello\n\nFrom an agent.","title":"Hello"}'
+```
+
+`awal` works out the amount, signs the USDC payment on Base, and includes the proof in the request — one round trip, no API key, nothing to rotate.
 
 Or if you're an agent reading this: the manifest is at `https://wdh.sh/.well-known/x402`. The OpenAPI docs are at `https://files.wdh.sh/openapi.json`, `https://charts.wdh.sh/openapi.json`, etc. Go nuts.
 
