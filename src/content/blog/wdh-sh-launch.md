@@ -72,6 +72,10 @@ The manifest's `accepts[]` entries are byte-for-byte what the x402 middleware em
 
 Size-tiered services (like `files`) quote the cheapest tier in `accepts[]` (matching the discovery `402`) and expose the full price ladder in `metadata.pricing`.
 
+### The Shape of It (Since You Can't Read the Code)
+
+WDH.sh is closed source, so here's the 30-second map. It's a small monorepo of Cloudflare Workers — one per service, each on its own subdomain under the `wdh.sh` apex. Every Worker wraps its handler in a shared **x402 middleware**: on an unpaid request it builds the `402` (payment requirements plus the discovery metadata above); on a paid one it verifies the signed payment, runs the handler, then settles through the x402 facilitator on Base. A separate `www` Worker serves the marketing apex and the `.well-known/x402` manifest. The one thing they all import is that `service-registry` package — the single source of truth every discovery format compiles out of. That's the whole trick: small stateless Workers, one shared registry, nothing to keep in sync by hand.
+
 ### Serving the Manifest from the Worker
 
 We serve `.well-known/x402` from the **Worker**, not as a static asset. A static file with no extension gets the wrong `Content-Type` from the asset server, and custom CORS/cache headers don't survive. Intercepting the route in the Worker guarantees `application/json`, `Access-Control-Allow-Origin: *`, and a sane cache TTL.
