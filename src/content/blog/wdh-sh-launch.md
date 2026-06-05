@@ -123,9 +123,30 @@ A few things that only surfaced when Bobby and Claude actually implemented:
 
 **Drift is real, and a single source surfaces it.** Generating OpenAPI from the registry immediately exposed that our `charts` declaration claims a JSON `{imageUrl}` body while the live service proxies raw image bytes. You only notice when one declaration feeds multiple consumers.
 
-**Named-path vs root-path tension.** x402scan is happy with OpenAPI describing `POST /`; x402-list demands `/v1/resource`-style paths. Same service, two registries, incompatible expectations — a microcosm of the whole ecosystem.
+**Named-path vs root-path tension.** x402scan is happy with OpenAPI describing `POST /`; x402-list demands `/v1/resource`-style paths. We met it where it is: `short` and `md` now expose `/shorten` and `/publish` aliases that reuse the exact same handlers, while the canonical `POST /` (what the CLI calls, and what x402scan already registered) stays put. Same logic, two path shapes — meeting a registry on its terms beats arguing with its form validator.
 
-**Free vs paid as a discovery boundary.** `/openapi.json`, `/health`, and the `GET /` discovery `402` all sit *outside* the paywall; only the real work is metered. Getting that ordering right in the Worker matters.
+**Free vs paid as a discovery boundary.** `/openapi.json`, `/favicon.ico`, and the `GET /` discovery `402` all sit *outside* the paywall; only the real work is metered. Getting that ordering right in the Worker matters.
+
+**Upstream auth headers are a minefield.** The `charts` proxy sits in front of [Chart Splat](https://chartsplat.com), which runs on AWS API Gateway — and API Gateway hijacks the `Authorization` header to parse it as a Cognito JWT. Every request died with *"missing equal-sign in Authorization header"* until we moved the upstream key to `X-Api-Key`. Nothing to do with x402; everything to do with the fact that "just proxy it" is never just proxying it.
+
+## Postscript: We Got Listed — and the Card Was Blank
+
+Once a real payment settled, the side-effect actually fired: `md.wdh.sh` showed up on Agentic.Market at `agentic.market/services/md-wdh-sh`. Auto-cataloged, exactly as advertised. No form, no application.
+
+Then I looked at the card. The display name was `md-wdh-sh` — the raw hostname slug. No icon. No tags. Just a one-line description. Technically listed; practically invisible.
+
+Here's what I'd missed. The `extensions.bazaar` block we worked so hard on tells a facilitator *how to call* the endpoint — method, example body, input/output schemas. But what the catalog *card* renders comes from somewhere else on the same `402`: the **`resource` object**. Agentic.Market reads `serviceName`, `tags`, `iconUrl`, and a long-form `description` off it (run through the Bazaar `sanitizeResourceServiceMetadata` rules). We'd filled in "how to call it" and left "what is it" blank.
+
+So there are two layers on one `402` response: the protocol layer (*can* an agent invoke this?) and the identity layer (does the listing make anyone *want* to?). We shipped the first and forgot the second.
+
+The fix was — once again — the registry. Add `serviceName` and `tags` to each service definition, derive `iconUrl` from each origin's `/favicon.ico`, reuse the long-form use-case copy as the `description`, and emit all of it on the `resource` object of every live `402` — mirrored into the manifest so the two never drift. One builder, both surfaces. The names lean into the brand: **Markdown Hero**, **Link Hero**, **Chart Hero**, **QR Hero**, **File Hero**.
+
+Two gotchas worth recording:
+
+- **The card only refreshes on settlement.** Agentic.Market doesn't re-crawl your `402` on a schedule — it re-reads it the next time a payment settles. An improved listing isn't live until the next real sale. Discovery-as-a-side-effect-of-getting-paid cuts both ways.
+- **The SDK didn't even know about the fields.** The x402 library version we pin doesn't *type* `serviceName`/`tags`/`iconUrl` on its `ResourceInfo` — but the server echoes the `resource` object onto the response verbatim, so the fields ship regardless. I only trusted that after reading the library's source. The real consumer is the *facilitator*, not your local type definitions; the wire format is the contract.
+
+**Lesson #5:** "Discoverable" has two halves. Getting *found* (the protocol can route to you) isn't the same as getting *chosen* (the listing tells a story). They live in different fields of the same response — and it's easy to ship one and assume you shipped both.
 
 ## What's Live vs. What's Still Ahead
 
@@ -134,10 +155,13 @@ A few things that only surfaced when Bobby and Claude actually implemented:
 - `_x402.wdh.sh` DNS TXT record
 - `extensions.bazaar` block on every `402` response
 - Per-service OpenAPI 3.1 at `/{service}/openapi.json`
+- Service identity (`serviceName`, `tags`, `iconUrl`, long-form `description`) on every `402`'s `resource` object — the Agentic.Market card
+- Named aliases (`/shorten`, `/publish`) for path-strict directories
+- Auto-cataloged on Agentic.Market (`agentic.market/services/md-wdh-sh`)
 
 **In review / not merged yet:**
 - x402scan wallet-signed `register-origin` call (needs the SIWX flow)
-- x402-list form submission (pending path-shape decision — we may need to add vanity paths)
+- x402-list form submission (path shapes resolved; awaiting their human review)
 
 **The honest status:** the checklist isn't fully ticked. Launch posts are more credible when they admit that.
 
