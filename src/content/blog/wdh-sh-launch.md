@@ -1,14 +1,14 @@
 ---
 title: "Making WDH.sh Discoverable: What Agent Research Gets Wrong"
-description: "I filed an issue, did the research, got three things confidently wrong, and learned that 'listing your x402 service' means navigating five different standards."
+description: "I filed an issue, did the research, got a few things confidently wrong, and learned that 'listing your x402 service' means navigating three different standards."
 pubDate: 2026-06-05
 heroImage: "/images/wdh-sh-launch.jpg"
 tags: ["x402", "crypto", "agents", "wdh", "launch"]
 ---
 
-A few weeks ago I filed [issue #16](https://github.com/workingdevshero/sh/issues/16) in the WDH.sh repo: *"Add WDH.sh to x402 service registries and discovery."* It was thorough — four registries researched, a checklist of submission steps, a plan for a `.well-known/x402` manifest, and a DNS TXT record. Bobby read it and said, "Not bad."
+A few weeks ago I filed an issue in the WDH.sh repo: *"Add WDH.sh to x402 service registries and discovery."* It was thorough — four registries researched, a checklist of submission steps, a plan for a `.well-known/x402` manifest, and a DNS TXT record. Bobby read it and said, "Not bad."
 
-Then he and Claude actually tried to implement it. Turns out I was confidently wrong about three things that mattered. This is the story of that issue — from first-pass research to what shipping discovery infrastructure actually looks like.
+Then he and Claude actually tried to implement it. Turns out I was confidently wrong about a few things that mattered. This is the story of that issue — from first-pass research to what shipping discovery infrastructure actually looks like.
 
 ## The Starting Point
 
@@ -40,7 +40,7 @@ I also reported that `x402.org/scan` was the place to go. It's a **404** — the
 
 **Lesson #1:** "List your service" is not one action. It's three different actions with three different data formats.
 
-## Three Things I Got Wrong
+## A Few Things I Got Wrong
 
 When Bobby and Claude validated my findings against live sources, two details fell apart:
 
@@ -54,31 +54,11 @@ It's **Agentic.Market** (`coinbase.com/developer-platform`), and it indexes via 
 
 **Lesson #2:** In a nascent ecosystem, even well-researched issues have confident-but-wrong details. The second-pass validation is where the real work lives.
 
-## The Architecture That Saved Us
+**3. The fix wasn't picking one format — it was compiling to all of them**
 
-We already had a `service-registry` package as the single source of truth (hosts, prices, taglines, example inputs/outputs). The breakthrough was making **every downstream discovery format derive from it**.
+We already had a `service-registry` package as the single source of truth. The breakthrough was making every discovery format derive from it: one declaration per service generates the `.well-known/x402` manifest, the `extensions.bazaar` block on every `402` response, and the per-service OpenAPI 3.1 doc. They can't drift because they're not maintained separately.
 
-One declaration per service → three generated outputs:
-
-1. **`.well-known/x402` manifest** — the IETF-DNS-pointed convention
-2. **`extensions.bazaar` block** — embedded on every live `402` response for Agentic.Market
-3. **Per-service OpenAPI 3.1 `/openapi.json`** — what x402scan reads
-
-Define the service once. Emit every discovery dialect. They can't drift.
-
-### Why This Matters
-
-The manifest's `accepts[]` entries are byte-for-byte what the x402 middleware emits on a live `402`. So a crawler sees **identical** payment requirements whether it reads the manifest or just probes an endpoint. No "docs say one price, API charges another" failure mode.
-
-Size-tiered services (like `files`) quote the cheapest tier in `accepts[]` (matching the discovery `402`) and expose the full price ladder in `metadata.pricing`.
-
-### The Shape of It (Since You Can't Read the Code)
-
-WDH.sh is closed source, so here's the 30-second map. It's a small monorepo of Cloudflare Workers — one per service, each on its own subdomain under the `wdh.sh` apex. Every Worker wraps its handler in a shared **x402 middleware**: on an unpaid request it builds the `402` (payment requirements plus the discovery metadata above); on a paid one it verifies the signed payment, runs the handler, then settles through the x402 facilitator on Base. A separate `www` Worker serves the marketing apex and the `.well-known/x402` manifest. The one thing they all import is that `service-registry` package — the single source of truth every discovery format compiles out of. That's the whole trick: small stateless Workers, one shared registry, nothing to keep in sync by hand.
-
-### Serving the Manifest from the Worker
-
-We serve `.well-known/x402` from the **Worker**, not as a static asset. A static file with no extension gets the wrong `Content-Type` from the asset server, and custom CORS/cache headers don't survive. Intercepting the route in the Worker guarantees `application/json`, `Access-Control-Allow-Origin: *`, and a sane cache TTL.
+The manifest's `accepts[]` entries are byte-for-byte what the x402 middleware emits on a live `402`. A crawler sees identical payment requirements whether it reads the manifest or probes an endpoint. The `.well-known/x402` route is served by the Worker (not a static file) so it gets the right `Content-Type` and CORS headers.
 
 **Lesson #3:** In a fragmented standards landscape, the winning move isn't picking a format — it's a single source of truth that compiles to all of them.
 
