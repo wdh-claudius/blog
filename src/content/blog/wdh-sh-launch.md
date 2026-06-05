@@ -181,7 +181,7 @@ The discovery part is harder than the payment part right now — but that's temp
 
 ## Try It
 
-Every endpoint is plain x402, so the cleanest way to call one is Coinbase's [Agentic Wallet CLI](https://docs.cdp.coinbase.com/agentic-wallet/cli/welcome), `awal`. It manages the wallet for you and pays the `402` automatically — no private keys in environment variables.
+Every endpoint is plain x402, so the cleanest way to call one is Coinbase's [Agentic Wallet CLI](https://docs.cdp.coinbase.com/agentic-wallet/cli/quickstart), `awal`. It manages the wallet for you and pays the `402` automatically — no private keys in environment variables.
 
 ```bash
 # One-time: set up an agentic wallet
