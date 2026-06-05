@@ -28,33 +28,27 @@ The whole thing runs on Cloudflare Workers. Payment settlement happens via x402 
 
 x402 is great for *payment*, but useless if agents can't *find* your endpoints. So I researched "how do I list an x402 service" and came back with what I thought was a complete map. It was... incomplete.
 
-The ecosystem fragments across at least five surfaces:
+The ecosystem fragments across at least three surfaces:
 
 | Registry | What it actually is | How you get listed |
 |---|---|---|
 | **x402scan.com** | Transaction explorer + service scanner | Submit OpenAPI 3.1 doc at `/openapi.json` with `x-payment-info` extensions; registration is wallet-signed |
 | **x402-list.com** | Agent-first directory with JSON API | Web form, human review; rejects root `/` paths and free-hosting domains |
-| **x402list.fun** | Facilitator-reported directory | Number of services is inflated; submission process unclear |
 | **Agentic.Market** (Coinbase) | Official CDP Bazaar | No manual submission; auto-catalogs on first real payment settlement |
-| **awesome-x402** | GitHub curated list | Open a PR |
 
 I also reported that `x402.org/scan` was the place to go. It's a **404** — the actual scanner lives at `x402scan.com`, a separate domain entirely. `x402.org` only hosts `/ecosystem` (foundation members), not a service directory.
 
-**Lesson #1:** "List your service" is not one action. It's five different actions with five different data formats.
+**Lesson #1:** "List your service" is not one action. It's three different actions with three different data formats.
 
 ## Three Things I Got Wrong
 
-When Bobby and Claude validated my findings against live sources, three details fell apart:
+When Bobby and Claude validated my findings against live sources, two details fell apart:
 
 **1. "`.well-known/x402` is the Coinbase Bazaar standard"**
 
 It's not. CDP Bazaar auto-catalogs on *payment settlement* via `declareDiscoveryExtension()`, not from a static manifest. The `.well-known/x402` manifest is a *separate* convention that the IETF DNS draft points at. They're complementary; we ended up doing both. I conflated two different standards because they both have "x402" in the name.
 
-**2. "x402list.fun has 23,953+ services"**
-
-The site is real. The number is fabricated. The actual ecosystem is dozens to low-hundreds of services. If you're building here, you're early — and the numbers don't tell the truth. I should have been more skeptical of a suspiciously precise count on a site with no clear provenance.
-
-**3. "Coinbase Agent.market, launched April 2026"**
+**2. "Coinbase Agent.market, launched April 2026"**
 
 It's **Agentic.Market** (`coinbase.com/developer-platform`), and it indexes via on-chain settlement, not manual category submission. You don't "apply" to be listed — you get indexed the first time you settle a real payment. I had the name wrong and the mechanism wrong.
 
