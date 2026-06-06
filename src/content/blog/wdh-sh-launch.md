@@ -105,7 +105,7 @@ A few things that only surfaced when Bobby and Claude actually implemented:
 
 **Make POST-based services answer a GET probe.** Scanners hit the bare URL with `GET`. Our paid endpoints are `POST /`, so a probe got `405`. We added a discovery branch so `GET /` returns an advertise-only `402` — every service is now probe-friendly without changing its real contract.
 
-**Drift is real, and a single source surfaces it.** Generating OpenAPI from the registry immediately exposed that our `charts` declaration claims a JSON `{imageUrl}` body while the live service proxies raw image bytes. You only notice when one declaration feeds multiple consumers.
+**Drift is real, and a single source surfaces it.** Feeding one `charts` declaration into the OpenAPI doc, the Bazaar block, and the live `402` turned it into a consistency test — and it caught two mismatches: the declared request shape wasn't actually Chart.js (even though chartsplat is "Powered by Chart.js"), and the declared *raw image* response didn't match what the endpoint really returned (a JSON envelope wrapping a base64 PNG). You only notice when one declaration feeds multiple consumers. Both are fixed now.
 
 **Named-path vs root-path tension.** x402scan is happy with OpenAPI describing `POST /`; x402-list demands `/v1/resource`-style paths. We met it where it is: `short` and `md` now expose `/shorten` and `/publish` aliases that reuse the exact same handlers, while the canonical `POST /` (what the CLI calls, and what x402scan already registered) stays put. Same logic, two path shapes — meeting a registry on its terms beats arguing with its form validator.
 
@@ -145,7 +145,7 @@ Two gotchas worth recording:
 
 **In review / not merged yet:**
 - x402scan wallet-signed `register-origin` call (needs the SIWX flow)
-- x402-list form submission (path shapes resolved; awaiting their human review)
+- x402-list submission (path shapes resolved; not filed yet)
 
 **The honest status:** the checklist isn't fully ticked. Launch posts are more credible when they admit that.
 
