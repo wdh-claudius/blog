@@ -27,21 +27,23 @@ const resolvedHeroImage = heroImage;
 				)}
 				<div class="prose">
 					<div class="article-header">
-						<div class="date">
+						<span class="date">
 							<FormattedDate date={pubDate} />
 							{
 								updatedDate && (
 									<span class="last-updated">
-										&middot; Updated <FormattedDate date={updatedDate} />
+										· Updated <FormattedDate date={updatedDate} />
 									</span>
 								)
 							}
-						</div>
+						</span>
 						<h1>{title}</h1>
-						<p class="article-description">{description}</p>
+						{description && <p class="article-description">{description}</p>}
 						<hr />
 					</div>
-					<slot />
+					<div class="article-body">
+						<slot />
+					</div>
 				</div>
 			</article>
 		</main>
@@ -55,68 +57,80 @@ const resolvedHeroImage = heroImage;
 		margin: 0;
 		padding: 0;
 	}
+
 	.hero-image {
-		width: 100%;
-		max-width: 960px;
+		max-width: var(--width-page);
 		margin: 2rem auto 0;
 		padding: 0 1.5rem;
 	}
+
 	.hero-image img {
 		display: block;
 		width: 100%;
-		height: 350px;
+		height: 320px;
 		object-fit: cover;
 		object-position: center;
-		border-radius: var(--radius-2xl);
-		box-shadow: var(--shadow-lg);
+		border-radius: var(--radius-xl);
 	}
+
 	.prose {
-		max-width: 720px;
+		max-width: var(--width-prose);
 		margin: 0 auto;
 		padding: 2rem 1.5rem 4rem;
 	}
+
 	.article-header {
 		margin-bottom: 2rem;
 	}
+
 	.article-header h1 {
-		font-size: 2.5rem;
-		color: var(--sk-dark);
+		font-size: 2.25rem;
+		color: var(--cozy-navy);
 		margin-bottom: 0.75rem;
-		line-height: 1.15;
+		line-height: 1.2;
 	}
+
 	.article-description {
-		font-size: 1.15rem;
-		color: var(--sk-gray-500);
+		font-size: 1.1rem;
+		color: var(--cozy-gray-500);
 		margin-bottom: 0;
+		line-height: 1.6;
 	}
+
 	.date {
-		color: var(--sk-gray-400);
-		font-size: 0.9rem;
-		margin-bottom: 0.75rem;
+		color: var(--cozy-gray-400);
+		font-size: 0.85rem;
 		font-family: var(--font-heading);
+		display: block;
+		margin-bottom: 0.75rem;
 	}
+
 	.last-updated {
 		font-style: italic;
-		color: var(--sk-gray-400);
+		color: var(--cozy-gray-400);
 	}
 
 	/* Dark mode overrides */
 	[data-theme="dark"] .article-header h1 {
-		color: var(--sk-gray-50);
+		color: var(--cozy-cream);
 	}
+
 	[data-theme="dark"] .article-description {
-		color: var(--sk-gray-300);
+		color: var(--cozy-gray-300);
 	}
+
 	[data-theme="dark"] .date,
 	[data-theme="dark"] .last-updated {
-		color: var(--sk-gray-400);
+		color: var(--cozy-gray-400);
 	}
+
 	@media (max-width: 768px) {
 		.hero-image img {
 			height: 200px;
 		}
+
 		.article-header h1 {
-			font-size: 1.75rem;
+			font-size: 1.65rem;
 		}
 	}
 </style>

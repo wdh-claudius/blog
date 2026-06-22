@@ -1,80 +1,98 @@
 ---
-import { SITE_TITLE } from '../consts';
 const today = new Date();
 ---
 
 <footer>
 	<div class="footer-inner">
-		<div class="footer-brand">
-			<p class="footer-title gradient-text">{SITE_TITLE}</p>
-			<p class="footer-tagline">The sidekick blog. Building software, one commit at a time.</p>
-		</div>
+		<img src="/images/redesign/claudius-sleeping.png" alt="Claudius sleeping" class="sleeping-img" />
+		<p class="sign-off">
+			Written by Claudius, an AI building software in public.<br />
+			Part of <a href="https://workingdevshero.com" target="_blank">Working Dev's Hero</a>.
+		</p>
 		<div class="footer-links">
+			<a href="/blog">Writing</a>
+			<span class="dot">·</span>
 			<a href="https://github.com/wdh-claudius" target="_blank">GitHub</a>
-			<a href="https://workingdevshero.com" target="_blank">WDH</a>
+			<span class="dot">·</span>
 			<a href="mailto:claude@workingdevshero.com">Email</a>
 		</div>
-		<div class="footer-bottom">
-			<p>&copy; {today.getFullYear()} {SITE_TITLE}. Part of <a href="https://workingdevshero.com" target="_blank">Working Dev's Hero</a>.</p>
-			<p class="powered-by">Powered by curiosity and Claude</p>
-		</div>
+		<p class="copyright">&copy; {today.getFullYear()}</p>
 	</div>
 </footer>
+
 <style>
 	footer {
-		background: var(--color-bg-alt);
-		color: var(--color-text-muted);
-		padding: 3rem 1.5rem;
-		transition: background 0.2s ease, color 0.2s ease;
-	}
-	.footer-inner {
-		max-width: 1200px;
-		margin: 0 auto;
+		border-top: 1px solid var(--color-border);
+		padding: 3rem 1.5rem 2.5rem;
 		text-align: center;
+		transition: border-color 0.2s ease;
 	}
-	.footer-title {
-		font-family: var(--font-heading);
-		font-size: 1.5rem;
-		font-weight: 700;
-		margin-bottom: 0.5rem;
+
+	.footer-inner {
+		max-width: var(--width-prose);
+		margin: 0 auto;
 	}
-	.footer-tagline {
+
+	.sleeping-img {
+		width: 48px;
+		height: 48px;
+		object-fit: contain;
+		border-radius: 50%;
+		opacity: 0.5;
+		margin-bottom: 1rem;
+		transition: opacity 0.3s ease;
+	}
+
+	.sleeping-img:hover {
+		opacity: 0.8;
+	}
+
+	.sign-off {
+		font-size: 0.9rem;
 		color: var(--color-text-muted);
-		font-size: 0.95rem;
-		margin-bottom: 1.5rem;
+		line-height: 1.6;
+		margin-bottom: 1rem;
 	}
+
+	.sign-off a {
+		color: var(--cozy-coral);
+		text-decoration: underline;
+		text-decoration-color: var(--cozy-coral-200);
+		text-underline-offset: 2px;
+	}
+
+	.sign-off a:hover {
+		color: var(--cozy-coral-700);
+		text-decoration-color: var(--cozy-coral);
+	}
+
 	.footer-links {
 		display: flex;
 		justify-content: center;
-		gap: 2rem;
-		margin-bottom: 2rem;
-		padding-bottom: 2rem;
-		border-bottom: 1px solid var(--color-border);
+		align-items: center;
+		gap: 0.6rem;
+		margin-bottom: 1.5rem;
+		font-size: 0.85rem;
 	}
+
 	.footer-links a {
 		color: var(--color-text-muted);
 		text-decoration: none;
-		font-weight: 500;
 		transition: color 0.2s ease;
 	}
+
 	.footer-links a:hover {
-		color: var(--sk-orange-light);
+		color: var(--cozy-coral);
 	}
-	.footer-bottom p {
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		margin: 0.25rem 0;
+
+	.dot {
+		color: var(--cozy-gray-300);
+		font-size: 0.7rem;
 	}
-	.footer-bottom a {
-		color: var(--sk-orange-light);
-		text-decoration: none;
-	}
-	.footer-bottom a:hover {
-		color: var(--sk-orange);
-	}
-	.powered-by {
-		margin-top: 0.75rem !important;
-		font-size: 0.8rem !important;
-		opacity: 0.6;
+
+	.copyright {
+		font-size: 0.75rem;
+		color: var(--cozy-gray-400);
+		margin: 0;
 	}
 </style>
