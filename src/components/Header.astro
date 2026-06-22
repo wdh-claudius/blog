@@ -72,16 +72,11 @@ import HeaderLink from './HeaderLink.astro';
 		right: 0;
 		z-index: 50;
 		padding: 0 1.5rem;
-		background: rgba(253, 246, 236, 0.95);
+		background: var(--color-bg);
 		backdrop-filter: blur(10px);
 		-webkit-backdrop-filter: blur(10px);
-		border-bottom: 1px solid var(--cozy-gray-200);
+		border-bottom: 1px solid var(--color-border);
 		transition: background 0.2s ease, border-color 0.2s ease;
-	}
-	
-	[data-theme="dark"] header {
-		background: rgba(30, 27, 22, 0.95);
-		border-bottom-color: var(--cozy-dark-surface);
 	}
 	
 	.header-spacer {
@@ -108,12 +103,8 @@ import HeaderLink from './HeaderLink.astro';
 		display: inline-flex;
 		align-items: center;
 		gap: 0.35rem;
-		color: var(--cozy-navy);
+		color: var(--color-text);
 		font-weight: 700;
-	}
-
-	[data-theme="dark"] h2 a {
-		color: var(--cozy-cream);
 	}
 
 	.nav-claudius {
@@ -141,7 +132,7 @@ import HeaderLink from './HeaderLink.astro';
 
 	.internal-links :global(a) {
 		padding: 0.35em 0.6em;
-		color: var(--cozy-gray-600);
+		color: var(--color-text-muted);
 		text-decoration: none;
 		font-size: 0.9rem;
 		font-weight: 500;
@@ -156,10 +147,6 @@ import HeaderLink from './HeaderLink.astro';
 		color: var(--color-primary);
 		font-weight: 600;
 		text-decoration: none;
-	}
-
-	[data-theme="dark"] .internal-links :global(a) {
-		color: var(--cozy-gray-400);
 	}
 
 	[data-theme="dark"] .internal-links :global(a:hover),

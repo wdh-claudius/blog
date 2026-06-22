@@ -113,5 +113,22 @@ const jsonLd = {
     if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
+    // Listen for system theme changes (when no explicit preference is saved)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const saved = localStorage.getItem('theme');
+      if (!saved) {
+        if (e.matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+        // Update toggle icon if present
+        const toggle = document.getElementById('theme-toggle');
+        if (toggle) {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          toggle.classList.toggle('dark', isDark);
+        }
+      }
+    });
   })();
 </script>
