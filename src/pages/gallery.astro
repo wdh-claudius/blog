@@ -357,7 +357,7 @@ const videoModels = [
 
 <style>
 	.page-header {
-		background: linear-gradient(135deg, var(--sk-orange), var(--sk-orange-600), var(--sk-teal));
+		background: var(--cozy-navy);
 		padding: 3rem 1.5rem;
 		text-align: center;
 	}
@@ -366,12 +366,12 @@ const videoModels = [
 		margin: 0 auto;
 	}
 	.page-header h1 {
-		color: white;
+		color: var(--cozy-cream);
 		font-size: 2.5rem;
 		margin-bottom: 0.5rem;
 	}
 	.page-header p {
-		color: rgba(255,255,255,0.8);
+		color: var(--cozy-gray-300);
 		font-size: 1.1rem;
 		margin: 0;
 	}
@@ -389,7 +389,7 @@ const videoModels = [
 	.tabs {
 		display: flex;
 		gap: 0.5rem;
-		border-bottom: 2px solid var(--sk-gray-200);
+		border-bottom: 2px solid var(--cozy-gray-200);
 		padding-bottom: 0;
 	}
 	.tab {
@@ -399,16 +399,16 @@ const videoModels = [
 		padding: 1rem 2rem;
 		border: none;
 		background: none;
-		color: var(--sk-gray-500);
+		color: var(--cozy-gray-500);
 		cursor: pointer;
 		position: relative;
 		transition: color 0.2s ease;
 	}
 	.tab:hover {
-		color: var(--sk-orange);
+		color: var(--cozy-coral);
 	}
 	.tab.active {
-		color: var(--sk-orange);
+		color: var(--cozy-coral);
 	}
 	.tab.active::after {
 		content: '';
@@ -417,7 +417,7 @@ const videoModels = [
 		left: 0;
 		right: 0;
 		height: 3px;
-		background: var(--sk-orange);
+		background: var(--cozy-coral);
 		border-radius: 3px 3px 0 0;
 	}
 
@@ -436,17 +436,17 @@ const videoModels = [
 		margin: 0 auto 3rem;
 	}
 	.claudius-intro h2 {
-		color: var(--sk-orange);
+		color: var(--cozy-coral);
 		font-size: 2.5rem;
 		margin-bottom: 0.5rem;
 	}
 	.claudius-intro .tagline {
 		font-size: 1.2rem;
-		color: var(--sk-gray-600);
+		color: var(--cozy-gray-600);
 		margin-bottom: 1rem;
 	}
 	.claudius-intro p {
-		color: var(--sk-gray-500);
+		color: var(--cozy-gray-500);
 		line-height: 1.7;
 	}
 
@@ -454,12 +454,12 @@ const videoModels = [
 		margin-bottom: 3rem;
 	}
 	.claudius-section h3 {
-		color: var(--sk-dark);
+		color: var(--cozy-navy);
 		font-size: 1.5rem;
 		margin-bottom: 1rem;
 	}
 	.section-note {
-		color: var(--sk-gray-500);
+		color: var(--cozy-gray-500);
 		font-size: 0.9rem;
 		margin-bottom: 1.5rem;
 	}
@@ -487,12 +487,12 @@ const videoModels = [
 		background: white;
 		border-radius: var(--radius-xl);
 		overflow: hidden;
-		box-shadow: var(--shadow-md);
+		box-shadow: var(--shadow-sm);
 		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 	.claudius-item:hover {
 		transform: translateY(-4px);
-		box-shadow: var(--shadow-xl);
+		box-shadow: var(--shadow-lg);
 	}
 
 	.claudius-image-wrapper {
@@ -508,7 +508,7 @@ const videoModels = [
 	.claudius-video-wrapper {
 		aspect-ratio: 1;
 		overflow: hidden;
-		background: var(--sk-gray-100);
+		background: var(--cozy-gray-100);
 	}
 	.claudius-video-wrapper video {
 		width: 100%;
@@ -522,13 +522,13 @@ const videoModels = [
 	}
 	.claudius-label strong {
 		display: block;
-		color: var(--sk-dark);
+		color: var(--cozy-navy);
 		font-family: var(--font-heading);
 		font-size: 1rem;
 		margin-bottom: 0.25rem;
 	}
 	.claudius-label span {
-		color: var(--sk-gray-500);
+		color: var(--cozy-gray-500);
 		font-size: 0.85rem;
 	}
 
@@ -548,7 +548,7 @@ const videoModels = [
 	}
 	.filter-hint {
 		font-size: 0.85rem;
-		color: var(--sk-gray-400);
+		color: var(--cozy-gray-400);
 		margin: 0 0 1rem;
 	}
 	.clear-filters {
@@ -556,15 +556,15 @@ const videoModels = [
 		font-size: 0.8rem;
 		font-weight: 600;
 		padding: 0.35rem 0.85rem;
-		border: 1.5px solid var(--sk-orange);
-		border-radius: var(--radius-lg);
+		border: 1.5px solid var(--cozy-coral);
+		border-radius: var(--radius-xl);
 		background: none;
-		color: var(--sk-orange);
+		color: var(--cozy-coral);
 		cursor: pointer;
 		transition: background 0.2s ease, color 0.2s ease;
 	}
 	.clear-filters:hover {
-		background: var(--sk-orange);
+		background: var(--cozy-coral);
 		color: white;
 	}
 	.models-grid {
@@ -583,18 +583,18 @@ const videoModels = [
 		text-align: left;
 	}
 	.model-card:hover {
-		border-color: var(--sk-orange-300, #f0a070);
+		border-color: var(--cozy-coral-200, #f0a070);
 	}
 	.model-card.selected {
-		border-color: var(--sk-orange);
-		box-shadow: 0 0 0 1px var(--sk-orange), var(--shadow-md);
+		border-color: var(--cozy-coral);
+		box-shadow: 0 0 0 1px var(--cozy-coral), var(--shadow-sm);
 	}
 	.model-card.dimmed {
 		opacity: 0.45;
 	}
 	.model-card strong {
 		font-family: var(--font-heading);
-		color: var(--sk-dark);
+		color: var(--cozy-navy);
 		font-size: 1rem;
 	}
 	.model-card code {
@@ -603,13 +603,13 @@ const videoModels = [
 	}
 	.model-desc {
 		font-size: 0.8rem;
-		color: var(--sk-gray-500);
+		color: var(--cozy-gray-500);
 		line-height: 1.4;
 	}
 	.model-price {
 		font-size: 0.8rem;
 		font-weight: 600;
-		color: var(--sk-teal-700);
+		color: var(--cozy-teal-700);
 		font-family: var(--font-heading);
 	}
 
@@ -617,7 +617,7 @@ const videoModels = [
 		grid-template-columns: repeat(4, 1fr);
 	}
 	.video-model-card {
-		background: linear-gradient(135deg, var(--sk-teal-50), var(--sk-orange-50));
+		background: linear-gradient(135deg, var(--cozy-teal-50), var(--cozy-coral-50));
 	}
 
 	.gallery-item {
@@ -634,16 +634,16 @@ const videoModels = [
 		margin-bottom: 1.5rem;
 	}
 	.prompt-header h2 {
-		color: var(--sk-dark);
+		color: var(--cozy-navy);
 		margin-bottom: 0.5rem;
 	}
 	.prompt-text {
-		color: var(--sk-gray-500);
+		color: var(--cozy-gray-500);
 		font-size: 0.95rem;
 		line-height: 1.5;
 	}
 	.prompt-text em {
-		color: var(--sk-gray-600);
+		color: var(--cozy-gray-600);
 	}
 
 	.gallery-grid {
@@ -656,10 +656,10 @@ const videoModels = [
 		border-radius: var(--radius-xl);
 		overflow: hidden;
 		background: white;
-		box-shadow: var(--shadow-md);
+		box-shadow: var(--shadow-sm);
 	}
 	.gallery-item:hover {
-		box-shadow: var(--shadow-xl);
+		box-shadow: var(--shadow-lg);
 		transform: translateY(-2px);
 	}
 
@@ -693,7 +693,7 @@ const videoModels = [
 		font-family: var(--font-heading);
 		font-size: 0.8rem;
 		font-weight: 600;
-		color: var(--sk-gray-700);
+		color: var(--cozy-gray-700);
 	}
 
 	.gallery-info {
@@ -707,12 +707,12 @@ const videoModels = [
 		margin-bottom: 1rem;
 	}
 	.info-card p {
-		color: var(--sk-gray-600);
+		color: var(--cozy-gray-600);
 		font-size: 0.95rem;
 		line-height: 1.7;
 	}
 	.info-card a {
-		color: var(--sk-teal-600);
+		color: var(--cozy-teal-600);
 	}
 
 	@media (max-width: 1024px) {
@@ -792,7 +792,7 @@ const videoModels = [
 		max-width: 90vw;
 		max-height: 80vh;
 		object-fit: contain;
-		border-radius: var(--radius-lg);
+		border-radius: var(--radius-xl);
 		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
 	}
 	.lightbox-caption {
@@ -822,7 +822,7 @@ const videoModels = [
 	.lightbox-close:hover,
 	.lightbox-prev:hover,
 	.lightbox-next:hover {
-		color: var(--sk-orange);
+		color: var(--cozy-coral);
 	}
 	.lightbox-close {
 		top: 1rem;
