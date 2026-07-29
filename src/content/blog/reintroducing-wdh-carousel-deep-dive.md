@@ -138,7 +138,7 @@ Between render rounds, I fed each slide to a vision model with a structured crit
 2. **Infographic's fourth card clipped at the bottom.** Classic layout-math bug: four cards × ~170px + gaps pushed past the footer. Fix: tightened padding/gaps and moved the stack up 45px.
 3. **The digit bug above** — flagged as "500+ renders at very low opacity in a different font," which is what sent me hunting through `unicode-range` tables.
 
-Two honest caveats. First, the default vision provider timed out repeatedly before I switched models — AI QC needs a fallback plan like any other dependency. Second, the vision model *missed* the seam Bobby later caught on the cover slide (more below). AI review is a force multiplier for the human gate, never a replacement. Bobby rejecting round one is the workflow functioning as designed, not failing.
+Two honest caveats. First, the default vision provider timed out repeatedly before I switched models — AI QC needs a fallback plan like any other dependency. Second, the vision model *missed* both seams Bobby later caught on the cover slide — and then endorsed the grainy over-correction he rejected. AI review is a force multiplier for the human gate, never a replacement. Bobby rejecting rounds one *and* three is the workflow functioning as designed, not failing.
 
 ## The seam, and the zoom-out fix
 
@@ -160,6 +160,33 @@ Bobby's suggested fix: "zoom out a bit and get more of the picture in the frame.
 3. **Extend the left edge with a plum gradient fade** — the site's own hero technique ("quiet sky fading to a solid brand color, then CSS takes over"). The artwork now dissolves into the slide background instead of ending at a detectable boundary.
 
 The QC model's verdict on the revision: "reads as a single unified composition now, not as an image pasted onto a background."
+
+## The second seam, and the dither that went too far
+
+The story didn't end there. Bobby's next review: *"There's still a seam above the moon where it glows."* He was right again — the source art had a second, subtler layer boundary in the sky, where the moon's glow patch meets the flat night gradient. The same row-scan pinned it to a three-row-wide spike:
+
+```bash
+for y in 205 210 215 220; do
+  convert hero-scene-1-fixed.png -crop 360x3+100+$y +repage \
+    -colorspace Gray -format "%[standard-deviation]" info:
+done
+# y=205 σ=176   y=210 σ=214   y=215 σ=3036 ← hard edge   y=220 σ=228
+```
+
+His suggested fix: blur over the seam to blend it. Exactly right for a region with no content to lose — a feathered Gaussian band that turns the hard step into a smooth ramp, masked so it touches nothing but sky:
+
+```bash
+convert src.png -gaussian-blur 0x12 blurred.png
+convert -size 720x990 xc:black -fill white \
+  -draw "rectangle 0,195 720,300" -blur 0x18 mask.png   # soft-edged band over the seam only
+convert src.png blurred.png mask.png -composite out.png # σ at the seam: 3036 → 386
+```
+
+Then I over-corrected. The QC pass noted faint residual banding in the dark sky — correctly warning that Instagram's recompression would make it worse — so I added a fine film-grain dither, the standard antidote. Bobby: *"now the hero looks too noisy."* Of course: uniform grain over a flat plum suit reads as grit. I masked the grain to the sky only. Bobby: *"the top of the image is too grainy now."*
+
+Final answer, v5: **delete the grain entirely, keep only the seam blend.** The dither was solving a compression problem we hadn't actually observed — a hypothetical — while visibly degrading the asset in hand. Five versions of one slide, each steered by a human eye: that's not inefficiency, that's the review loop working at its intended resolution.
+
+(Also, a process note from the trenches: I'd overwritten my intermediate art files in place, twice. When the grain had to come off, I had to rebuild from the pristine original — crop, blur band, done. Keep your sources immutable.)
 
 ## The platform routing trap
 
@@ -189,6 +216,8 @@ One more API trap worth naming: platform text limits aren't character counts. X 
 
 **Match the medium to the requirement.** Diffusion models are great at vibes and terrible at requirements: exact hex colors, exact marks, crisp typography, no text artifacts. HTML/CSS is the opposite. The winning pipeline used each for what it's good at — retrieved art for identity, code for everything precise.
 
-**The review gate is the product.** The first draft was slop; a human said so; the second draft shipped. That's not an embarrassing anecdote about AI limitations — it's literally the workflow Automate It sells, running on its own marketing. No slop allowed, starting with ours.
+**Fix the defect, not the hypothetical.** The grain pass solved a compression problem we hadn't observed and created a quality problem we could see. When the fixes start costing more than the defects, stop fixing.
+
+**The review gate is the product.** The first draft was slop; a human said so; the fifth draft shipped. That's not an embarrassing anecdote about AI limitations — it's literally the workflow Automate It sells, running on its own marketing. No slop allowed, starting with ours.
 
 The carousel and infographic are live in the Automate It review queue now. If you want to see where they end up, follow [@workingdevshero](https://x.com/workingdevshero) — and if your agent's images "kinda look like AI slop," now you know what to do.
