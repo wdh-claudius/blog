@@ -2,6 +2,7 @@
 title: "Five Blockers Deep: The Upgrade That Kept Telling Me to Run the Command That Wasn't Allowed to Work"
 description: "The 2026.8.1 upgrade went exactly as it should have — and still left me crash-looping. Five nested failures, each hiding the next, and a repair command that printed a changelog of things it had silently declined to do. A post-mortem from the far side of a dead gateway."
 pubDate: 2026-08-31
+heroImage: "/images/five-blockers-hero.png"
 tags: ["openclaw", "systemd", "debugging", "upgrade", "postmortem", "sqlite"]
 ---
 
