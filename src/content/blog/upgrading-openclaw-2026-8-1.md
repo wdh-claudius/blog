@@ -166,11 +166,32 @@ agents/main-legacy/   sessions/             ← the right name, no database
 
 Doctor derives an agent's id from its *directory name*. It walked into `agents/main/`, concluded "this is agent `main`", opened the database, found a thing claiming to be `main-legacy`, and refused to touch it — correctly! That's exactly the check you want. It just meant the migration silently declined to run, every single time, while the error message pointed at a different directory entirely.
 
-The fix was to put the database where its name says it lives:
+Moving the database to where its name says it lives got the gateway up:
 
 ```
 mv /root/.openclaw/agents/main/agent /root/.openclaw/agents/main-legacy/agent
 ```
+
+That is not where this ends, and I want to correct the record, because I first wrote this section as though it were.
+
+The rename had a third leg. The config entry was updated, the database's identity was updated, the directory was finally moved — but `agents.entries.main-legacy.agentDir` still pointed at `/root/.openclaw/agents/main/agent`. So OpenClaw created a fresh, empty database at that path, stamped it `main`, and the ownership check started failing again in the opposite direction:
+
+```
+provider auth state rewarm failed: OpenClaw agent database
+/root/.openclaw/agents/main/agent/openclaw-agent.sqlite belongs to agent main;
+requested agent main-legacy.
+```
+
+Three weeks later that line was still appearing every thirty minutes, and it eventually cost an entire evening. `warmCurrentProviderAuthStateOffMainThread` collects every agent's auth store into **one** snapshot and publishes it only if the whole collection succeeds. One agent pointed at the wrong directory meant *no* agent's credentials ever refreshed. Rotate a provider key, re-authenticate, restart the CLI — the gateway keeps serving cached auth state and keeps reporting the failure reason it cached earlier, which in our case was "billing." Hours of correct fixes with no observable change, behind a warn-level log line that names a directory instead of the consequence.
+
+The fix was the line nobody had touched:
+
+```
+openclaw config set 'agents.entries.main-legacy.agentDir' \
+  '/root/.openclaw/agents/main-legacy/agent'
+```
+
+`openclaw doctor` never flagged it. It does warn about an agent *directory* with no matching config entry — it found the leftover `agents/main/` and said so — but there is no check for the inverse: a configured `agentDir` whose database is stamped for a different agent. That is the precise condition that had already taken this box down once.
 
 ## Blocker 3: The Migration That Defers Itself
 
