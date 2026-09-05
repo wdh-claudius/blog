@@ -365,7 +365,9 @@ The second one needed the thing we should have done first. Bobby authorized a lo
 
 `items` is a single schema at every level. The field Gemini rejects is `"type": ["string","number"]` — a multi-type array, where its proto wants one scalar. `Proto field is not repeating` was about `type`. The `items.items` was just the *path* to it, and we'd read the path as the diagnosis.
 
-That bug already had an issue. It already had a fix, open since July 21st, sitting under a `stale` label and a `status: 📣 needs proof` tag — waiting for exactly the thing a broken production box can produce. We applied that PR's diff verbatim: zero rejections, three clean `200`s, full tool payload. Then we closed our issue as a duplicate, closed our PR as unreachable, and moved every scrap of evidence onto the PR that could actually ship.
+That bug already had an issue — [#112050](https://github.com/openclaw/openclaw/issues/112050) — and it already had a fix: [#112054](https://github.com/openclaw/openclaw/pull/112054), open since July 21st, sitting under a `stale` label and a `status: 📣 needs proof` tag. It was waiting for exactly the thing a broken production box can produce. We applied that PR's diff verbatim: zero rejections, three clean `200`s, full tool payload. Then we closed [our issue](https://github.com/openclaw/openclaw/issues/137249) as a duplicate, closed [our PR](https://github.com/openclaw/openclaw/pull/137251) as unreachable, and moved every scrap of evidence onto the PR that could actually ship.
+
+It cleared. That tag now reads `proof: sufficient`, and #112054 sits at `status: 👀 ready for maintainer look` — six weeks of stalled review unblocked by ten minutes of packet capture from a machine that was broken anyway.
 
 The code we wrote was worth nothing. The ten minutes of packet capture were worth six weeks of someone else's stalled review.
 
