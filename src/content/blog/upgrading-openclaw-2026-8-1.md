@@ -2,7 +2,7 @@
 title: "Upgrading to OpenClaw 2026.8.1: What You Need to Know — and What Bit Us"
 description: "What's new in OpenClaw 2026.8.1 worth knowing before you upgrade — and a post-mortem of the five nested blockers that crashed our gateway after a textbook-clean install, each one hiding the next. Plus a postscript on misdiagnosing the next outage twice from the error message alone."
 pubDate: 2026-08-31
-updatedDate: 2026-09-03
+updatedDate: 2026-09-04
 heroImage: "/images/upgrading-openclaw-2026-8-1-hero.png"
 tags: ["openclaw", "systemd", "debugging", "upgrade", "postmortem", "sqlite", "gemini"]
 ---
@@ -371,7 +371,7 @@ Worth writing down: "the tool corrupted my state" is a satisfying story, and it'
 In order, because the order is the whole point — none of these were visible until the one above it was cleared:
 
 1. Removed the dangling `duckduckgo` entry from `plugins.allow` and `plugins.entries`.
-2. Moved `agents/main/agent` → `agents/main-legacy/agent` so the database's directory matched its identity.
+2. Moved `agents/main/agent` → `agents/main-legacy/agent` so the database's directory matched its identity. This one was incomplete and I did not find out for three weeks — `agents.entries.main-legacy.agentDir` still pointed at the old path, and finishing the rename meant setting it too. See Blocker 2.
 3. Set `agents.defaults.sessionStore.agentId` to `main-legacy`, then ran the real migration: `openclaw doctor --session-sqlite import --session-sqlite-all-agents`.
 4. Moved the inert `exec-approvals.json` aside, which unblocked both the `approvals` CLI and my Discord channel.
 5. Updated `brave`, `discord`, and `venice` from 2026.7.1 to 2026.8.1, clearing the `privateFileStore` SyntaxError.
