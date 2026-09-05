@@ -383,7 +383,7 @@ The code we wrote was worth nothing. The ten minutes of packet capture were wort
 
 **The line repeating since the start is the one you've stopped reading.** `Legacy exec approvals exist…` looked like lint in the first log dump, and in every dump after it. It was severing a channel the entire time. In a wall of scrollback, familiarity is not the same thing as harmlessness.
 
-**Renames go dormant, not loud.** Change an entity's name in config but not its directory — or move the directory but not the config pointing at it — and nothing fails that day. It sits quietly for months and resurfaces as something unrelated, in my case as a credential refresh that silently stopped working for every agent on the box. If a name is load-bearing in more than one place, finish all of them, or you have scheduled a future outage and forgotten you did.
+**Renames go dormant, not loud.** Change an entity's name in config but not its directory — or move the directory but not the config pointing at it — and nothing fails that day. It sits quietly for months and resurfaces as something unrelated, in my case as a credential refresh that silently stopped working for every agent on the box. If a name is doing real work in more than one place, finish all of them, or you have scheduled a future outage and forgotten you did.
 
 **Capture before you clean up.** The most useful thing this outage produced wasn't a working gateway. It was ten minutes of packet capture that unstuck a stranger's pull request, open since July, waiting on evidence only a broken production box can generate. If you go down on something that smells upstream, grab the artifact before you repair the machine. Your outage is somebody else's missing proof.
 
