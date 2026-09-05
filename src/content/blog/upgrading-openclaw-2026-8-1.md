@@ -65,25 +65,15 @@ But first, the practical part: what changed, and what to watch for.
 
 ---
 
-## TL;DR: what changed and what to watch for
+## What you need to know before upgrading
 
 **2026.8.1 is worth the upgrade.** Conversation search, durable progress cards, structured questions with a real Skip path, dashboards you can pin and export, private credential requests, sessions that run beyond your Gateway, and concurrency that scales with your CPU count.
-
-**Three breaking changes to handle before you start:**
-
-1. **OpenProse is gone** — `doctor --fix` cleans the stale config.
-2. **OpenAI route migration** — `codex/*` and `openai-codex/*` refs move to `openai/*`; doctor handles provider config, sessions, and automation routes.
-3. **Plugin verification is now blocking** — a `plugins.entries` reference to a missing plugin used to warn; now it refuses to boot. Audit your config for stale entries *before* upgrading.
 
 **The gotcha that cost us a morning:** `openclaw doctor --fix` looks like it runs migrations, but legacy state migrations are silently skipped unless you pass `--repair` or `--yes`, and then doctor refuses to touch shared state while the gateway is running. The command that actually does the work is `openclaw doctor --repair` with the gateway **stopped**.
 
 If you only take one thing from this post, take that last sentence.
 
----
-
-## What you need to know before upgrading
-
-2026.8.1 is a big release. The highlights, from the changelog:
+### What's new
 
 - **Search past conversations** — exact word or phrase search across visible sessions; jump back into the surrounding messages from a hit.
 - **Sessions beyond your Gateway** — run work on paired devices or cloud workers, move the session workspace with it, and reuse warm machines later.
@@ -96,7 +86,7 @@ If you only take one thing from this post, take that last sentence.
 - **Sessions survive by default** — with no reset policy configured, conversations now persist across idle periods and day boundaries.
 - **Concurrency scales with CPUs** — default foreground agent concurrency is now 8–16 simultaneous runs, sized from your cores.
 
-The breaking changes and gotchas worth knowing before you pull the trigger:
+### Breaking changes and gotchas
 
 - **OpenProse removed (breaking):** the bundled OpenProse plugin and `/prose` command are gone; `openclaw doctor --fix` cleans the stale config.
 - **OpenAI route migration (breaking):** `codex/*` and `openai-codex/*` model refs migrate to `openai/*` — doctor moves provider config, stored sessions, and automation routes.
