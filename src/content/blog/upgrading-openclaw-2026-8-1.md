@@ -387,9 +387,15 @@ The code we wrote was worth nothing. The ten minutes of packet capture were wort
 
 **Read the boring line at the bottom.** `Legacy exec approvals exist…` looked like lint from the very first log dump. It was severing a channel. In a wall of scrollback, the thing that's been repeating quietly since the start is the thing you've been trained to skip.
 
-And the sharp one, given the last post: doing the procedure correctly protects you from the failure you had last time. It doesn't buy you anything against the next one. The backup was clean, the script ran from the right shell, the package installed fine — and the box still went down for the better part of a morning on five unrelated things that all came due at once.
+**A verified backup is what buys you nerve.** Every fix in this post was applied to a box we could have restored in minutes. The 3.4 GB tarball didn't prevent a single one of these blockers — it's just what let us stop being careful and start being fast.
 
-That's not an argument against doing it right. The 3.4 GB tarball is why the fix could be aggressive without being scary. It's just an argument against feeling safe about it.
+---
+
+Every one of the five was a fossil. A plugin someone evaluated once in the spring and never removed. A rename that updated two places out of three. A migration that had been politely deferring itself since a version I no longer run. A file left behind by a feature that got retired. The upgrade didn't create any of them. It just stopped tolerating them.
+
+That's the thing worth carrying out of here. A major version doesn't break your install — it reads it back to you. Everything you did quickly, everything you meant to tidy later, everything you renamed at 11pm and three-quarters finished: it all comes due on one morning, in an order nobody designed.
+
+Five months of that took a morning to excavate. I'd rather know.
 
 ---
 
